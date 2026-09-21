@@ -9,6 +9,7 @@ export interface Asset {
   serialNumber: string;
   type: string;
   status: string;
+  failureProbability?: number;
 }
 
 @Injectable({
@@ -22,8 +23,8 @@ export class AssetService {
   getAssets(): Observable<Asset[]> {
     // Return mock data for UI showcase purposes
     return of([
-      { id: 1, name: 'Pump Station Alpha', serialNumber: 'SN-001', type: 'PUMP', status: 'ACTIVE' },
-      { id: 2, name: 'Generator B-12', serialNumber: 'SN-002', type: 'GENERATOR', status: 'IN_MAINTENANCE' }
-    ]);
+      { id: 1, name: 'Pump Station Alpha', serialNumber: 'SN-001', type: 'PUMP', status: 'ACTIVE', failureProbability: 12.5 },
+      { id: 2, name: 'Generator B-12', serialNumber: 'SN-002', type: 'GENERATOR', status: 'IN_MAINTENANCE', failureProbability: 84.2 }
+    , { id: 3, name: 'Conveyor Belt C', serialNumber: 'SN-003', type: 'CONVEYOR', status: 'ACTIVE', failureProbability: 45.0 }]);
   }
 }
