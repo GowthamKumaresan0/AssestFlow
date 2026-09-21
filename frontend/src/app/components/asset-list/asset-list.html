@@ -1,0 +1,38 @@
+<div class="flex h-screen bg-slate-50 overflow-hidden">
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <main class="flex-1 overflow-y-auto p-6 md:p-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+          <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Asset Directory</h1>
+          <button routerLink="/dashboard" class="px-4 py-2 bg-slate-200 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-300 transition">Back to Dashboard</button>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr>
+                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-100">ID</th>
+                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-100">Name</th>
+                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-100">Type</th>
+                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-100">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr *ngFor="let asset of assets" class="hover:bg-slate-50 transition">
+                <td class="px-6 py-4 text-sm font-medium text-indigo-600">#{{ asset.id }}</td>
+                <td class="px-6 py-4 text-sm text-slate-700">{{ asset.name }}</td>
+                <td class="px-6 py-4 text-sm text-slate-500">{{ asset.type }}</td>
+                <td class="px-6 py-4 text-sm">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                    [ngClass]="{'bg-emerald-100 text-emerald-800': asset.status === 'ACTIVE', 'bg-amber-100 text-amber-800': asset.status === 'IN_MAINTENANCE'}">
+                    {{ asset.status }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
