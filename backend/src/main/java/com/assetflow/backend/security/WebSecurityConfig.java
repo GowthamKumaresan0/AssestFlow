@@ -1,5 +1,6 @@
 package com.assetflow.backend.security;
 
+import org.springframework.security.config.Customizer;
 import com.assetflow.backend.security.jwt.AuthEntryPointJwt;
 import com.assetflow.backend.security.jwt.AuthTokenFilter;
 import com.assetflow.backend.security.services.UserDetailsServiceImpl;
@@ -54,7 +55,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configure(http))
+            .cors(Customizer.withDefaults())
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> 
