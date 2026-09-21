@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface WorkOrder {
   id?: number;
   title: string;
+  description: string;
   status: string;
   priority: string;
+  dueDate: string;
 }
 
 @Injectable({
@@ -19,10 +21,10 @@ export class WorkOrderService {
   constructor(private http: HttpClient) { }
 
   getWorkOrders(): Observable<WorkOrder[]> {
-    // Mock data for UI showcase
-    return of([
-      { id: 1, title: 'Inspect Alpha Pump', status: 'IN_PROGRESS', priority: 'HIGH' },
-      { id: 2, title: 'Routine Generator check', status: 'PENDING', priority: 'LOW' }
-    ]);
+    return this.http.get<WorkOrder[]>(this.apiUrl);
+  }
+
+  createWorkOrder(workOrder: WorkOrder): Observable<WorkOrder> {
+    return this.http.post<WorkOrder>(this.apiUrl, workOrder);
   }
 }
