@@ -3,7 +3,7 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests > maven.log || (echo "MAVEN BUILD FAILED:" && tail -n 50 maven.log && exit 1)
 
 # Run stage
 FROM eclipse-temurin:17-jre-alpine

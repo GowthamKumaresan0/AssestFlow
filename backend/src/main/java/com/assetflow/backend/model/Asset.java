@@ -26,8 +26,11 @@ public class Asset {
     private String location;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(length = 20)
     private AssetStatus status;
+
+    @Column(name = "failure_probability")
+    private Double failureProbability;
 
     private LocalDate purchaseDate;
 
